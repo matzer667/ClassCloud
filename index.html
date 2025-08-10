@@ -4,26 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ClassCloud - Téléchargement de documents</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="icon" type="image/png" href="logo/logo.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Logo ClassCloud" id="logo">
-        <h1>ClassCloud</h1>
+        <img src="logo/logo.png" alt="Logo ClassCloud" id="logo">
+        <h1><a href="index.html" style="color:inherit; text-decoration:none;">ClassCloud</a></h1>
+        <nav class="main-nav">
+            <a class="nav-link" href="index.html" style="background:none;color:#23272f;font-weight:500;padding:0.5rem 1.2rem;">Accueil</a>
+            <a class="nav-link" href="cours.html">Cours particulier</a>
+            <a class="nav-link" href="feedback.html">Feedback</a>
+        </nav>
     </header>
+
+    <div style="max-width:1100px;margin:2rem auto 1.5rem auto;padding:1.2rem 1.5rem;background:#f7f8fa;border-radius:8px;border:1px solid #e5e7eb;display:flex;align-items:center;gap:2.2rem;position:relative;z-index:10;">
+        <!-- Sélecteur de matières -->
+        <div style="display:flex;align-items:center;gap:1.2rem;">
+            <label for="matiere-select" style="font-size:1rem;color:#23272f;font-weight:500;">Matières :</label>
+            <div id="matiere-select" style="position:relative;">
+                <button type="button" id="matiere-btn" style="width:220px;padding:0.6rem;border-radius:6px;border:1px solid #e5e7eb;background:#fff;color:#23272f;font-size:1rem;outline:none;box-shadow:0 1px 4px #0001;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                    <span id="matiere-btn-label">Sélectionner...</span>
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6 8L10 12L14 8" stroke="#23272f" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <div id="matiere-dropdown" style="display:none;position:absolute;top:110%;left:0;width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 4px 16px #0002;padding:0.5rem 0;z-index:20;">
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;padding:0 1rem 0.5rem 1rem;">
+                        <button type="button" id="matiere-tout-cocher" style="font-size:0.95rem;padding:0.2rem 0.7rem;border-radius:5px;border:1px solid #e5e7eb;background:#eaf4ff;color:#23272f;cursor:pointer;">Tout cocher</button>
+                        <button type="button" id="matiere-tout-effacer" style="font-size:0.95rem;padding:0.2rem 0.7rem;border-radius:5px;border:1px solid #e5e7eb;background:#f7f8fa;color:#23272f;cursor:pointer;">Tout effacer</button>
+                    </div>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="maths"> Maths
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="physique"> Physique
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="svt"> SVT
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="anglais"> Anglais
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="francais"> Français
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="philosophie"> Philosophie
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="informatique"> Informatique
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="autre"> Autre
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Sélecteur de niveaux -->
+        <div style="display:flex;align-items:center;gap:1.2rem;">
+            <label for="niveau-select" style="font-size:1rem;color:#23272f;font-weight:500;">Niveaux :</label>
+            <div id="niveau-select" style="position:relative;">
+                <button type="button" id="niveau-btn" style="width:180px;padding:0.6rem;border-radius:6px;border:1px solid #e5e7eb;background:#fff;color:#23272f;font-size:1rem;outline:none;box-shadow:0 1px 4px #0001;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                    <span id="niveau-btn-label">Sélectionner...</span>
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M6 8L10 12L14 8" stroke="#23272f" stroke-width="2" stroke-linecap="round"/></svg>
+                </button>
+                <div id="niveau-dropdown" style="display:none;position:absolute;top:110%;left:0;width:180px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 4px 16px #0002;padding:0.5rem 0;z-index:20;">
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;padding:0 1rem 0.5rem 1rem;">
+                        <button type="button" id="niveau-tout-cocher" style="font-size:0.95rem;padding:0.2rem 0.7rem;border-radius:5px;border:1px solid #e5e7eb;background:#eaf4ff;color:#23272f;cursor:pointer;">Tout cocher</button>
+                        <button type="button" id="niveau-tout-effacer" style="font-size:0.95rem;padding:0.2rem 0.7rem;border-radius:5px;border:1px solid #e5e7eb;background:#f7f8fa;color:#23272f;cursor:pointer;">Tout effacer</button>
+                    </div>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="3ème"> 3ème
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="2nde"> 2nde
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="1ère"> 1ère
+                    </label>
+                    <label style="display:flex;align-items:center;padding:0.4rem 1rem;gap:0.7rem;cursor:pointer;font-size:1rem;">
+                        <input type="checkbox" value="Terminale"> Terminale
+                    </label>
+                </div>
+            </div>
+        </div>
+        <span style="font-size:0.95rem;color:#6b7280;">(Sélection multiple possible)</span>
+    </div>
+    <script>
+    // Dropdown matières custom
+    const btn = document.getElementById('matiere-btn');
+    const dropdown = document.getElementById('matiere-dropdown');
+    const labels = dropdown.querySelectorAll('label');
+    const checkboxes = dropdown.querySelectorAll('input[type=checkbox]');
+    const labelSpan = document.getElementById('matiere-btn-label');
+    const toutCocher = document.getElementById('matiere-tout-cocher');
+    const toutEffacer = document.getElementById('matiere-tout-effacer');
+
+    // Dropdown niveaux custom
+    const niveauBtn = document.getElementById('niveau-btn');
+    const niveauDropdown = document.getElementById('niveau-dropdown');
+    const niveauCheckboxes = niveauDropdown.querySelectorAll('input[type=checkbox]');
+    const niveauLabelSpan = document.getElementById('niveau-btn-label');
+    const niveauToutCocher = document.getElementById('niveau-tout-cocher');
+    const niveauToutEffacer = document.getElementById('niveau-tout-effacer');
+    btn.addEventListener('click', e => {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    niveauBtn.addEventListener('click', e => {
+        niveauDropdown.style.display = niveauDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', e => {
+        if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.style.display = 'none';
+        }
+        if (!niveauBtn.contains(e.target) && !niveauDropdown.contains(e.target)) {
+            niveauDropdown.style.display = 'none';
+        }
+    });
+    checkboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const selected = Array.from(checkboxes).filter(c => c.checked).map(c => c.parentElement.textContent.trim());
+            labelSpan.textContent = selected.length ? selected.join(', ') : 'Sélectionner...';
+            // Filtrage des cartes PDF selon les matières sélectionnées
+            filterCards();
+        });
+    });
+    niveauCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+            const selected = Array.from(niveauCheckboxes).filter(c => c.checked).map(c => c.parentElement.textContent.trim());
+            niveauLabelSpan.textContent = selected.length ? selected.join(', ') : 'Sélectionner...';
+            filterCards();
+        });
+    });
+    toutCocher.addEventListener('click', () => {
+        checkboxes.forEach(cb => cb.checked = true);
+        checkboxes[0].dispatchEvent(new Event('change'));
+    });
+    toutEffacer.addEventListener('click', () => {
+        checkboxes.forEach(cb => cb.checked = false);
+        checkboxes[0].dispatchEvent(new Event('change'));
+    });
+
+    niveauToutCocher.addEventListener('click', () => {
+        niveauCheckboxes.forEach(cb => cb.checked = true);
+        niveauCheckboxes[0].dispatchEvent(new Event('change'));
+    });
+    niveauToutEffacer.addEventListener('click', () => {
+        niveauCheckboxes.forEach(cb => cb.checked = false);
+        niveauCheckboxes[0].dispatchEvent(new Event('change'));
+    });
+
+    // Fonction de filtrage combiné matières + niveaux
+    function filterCards() {
+        const matieres = Array.from(checkboxes).filter(c => c.checked).map(c => c.parentElement.textContent.trim().toLowerCase());
+        const niveaux = Array.from(niveauCheckboxes).filter(c => c.checked).map(c => c.parentElement.textContent.trim().toLowerCase());
+        const cards = document.querySelectorAll('.pdf-item');
+        cards.forEach(card => {
+            const titre = card.querySelector('h2').textContent.toLowerCase();
+            const matiereMatch = matieres.length === 0 || matieres.some(matiere => titre.includes(matiere));
+            const niveauMatch = niveaux.length === 0 || niveaux.some(niveau => titre.includes(niveau));
+            card.style.display = (matiereMatch && niveauMatch) ? '' : 'none';
+        });
+    }
+    </script>
     <main>
         <section id="pdf-list">
             <!-- Exemple de case PDF, à dupliquer pour chaque PDF -->
             <div class="pdf-item">
                 <img src="visupdf/prelude.png" alt="Aperçu fiche_cours_1ere (2).pdf" class="pdf-preview">
-                <h2>Cours premiere</h2>
+                <h2>Maths - Cours 1ère</h2>
                 <div class="pdf-spacer"></div>
                 <a href="pdfs/fiche_cours_1ere (2).pdf" download target="_blank">Télécharger</a>
             </div>
             <div class="pdf-item">
                 <img src="visupdf/bases.png" alt="Aperçu fiche_cours_revisions__1ere.pdf" class="pdf-preview">
-                <h2>Revisions et bases</h2>
+                <h2>Maths - Révisions et bases</h2>
                 <div class="pdf-spacer"></div>
                 <a href="pdfs/fiche_cours_revisions__1ere.pdf" download target="_blank">Télécharger</a>
             </div>
@@ -40,7 +194,7 @@
         <p>© 2025 Mathis</p>
         <div id="socials">
             <a href="https://www.linkedin.com/in/mathis-euzen-08b841350/" target="_blank" rel="noopener" title="LinkedIn">
-                <img src="linkedin.png" alt="LinkedIn">
+                <img src="logo/linkedin.png" alt="LinkedIn">
             </a>
         </div>
     </footer>

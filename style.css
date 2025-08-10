@@ -1,3 +1,75 @@
+.nav-link {
+    margin-left: 1.5rem;
+    margin-right: 0;
+    color: #23272f;
+    background: none;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    box-shadow: none;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+}
+.nav-link:hover {
+    background: #eaf4ff;
+    color: #23272f;
+    box-shadow: none;
+}
+/* Menu déroulant Niveaux */
+.main-nav {
+    margin-left: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background: none;
+    color: #23272f;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+.dropbtn:hover, .dropdown:hover .dropbtn {
+    background: #eaf4ff;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 140px;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.13);
+    border-radius: 6px;
+    z-index: 10;
+    margin-top: 0.3rem;
+    padding: 0.3rem 0;
+}
+.dropdown-content a {
+    color: #23272f;
+    padding: 0.7rem 1.2rem;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+.dropdown-content a:hover {
+    background: #eaf4ff;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 .pdf-spacer {
     flex: 1 1 auto;
 }
