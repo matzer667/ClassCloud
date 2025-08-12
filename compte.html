@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassCloud - Compte</title>
+    <link rel="icon" type="image/png" href="logo/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js" defer></script>
+    <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      const supabaseUrl = 'https://idsidgjwjmvochbpfccc.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlkc2lkZ2p3am12b2NoYnBmY2NjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwMzUzMDIsImV4cCI6MjA3MDYxMTMwMn0.3i5pIQL9jgw7kaAkhteiDDpxdtYoPKN6vu5FY4X3mK4';
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+      window.signUp = async function() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        if (!email || !password) {
+          alert('Merci de remplir les deux champs.');
+          return;
+        }
+        const { error } = await supabase.auth.signUp({ email, password });
+        alert(error ? error.message : 'Vérifie tes mails pour valider ton compte !');
+        showUser();
+      }
+      window.signIn = async function() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        if (!email || !password) {
+          alert('Merci de remplir les deux champs.');
+          return;
+        }
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if(error) alert(error.message);
+        showUser();
+      }
+      window.signOut = async function() {
+        await supabase.auth.signOut();
+        showUser();
+      }
+      async function showUser() {
+        const { data } = await supabase.auth.getUser();
+        const alertDiv = document.getElementById('login-alert');
+        if(data.user) {
+          document.getElementById('user-info').innerText = 'Connecté : ' + data.user.email;
+          alertDiv.style.display = '';
+        } else {
+          document.getElementById('user-info').innerText = 'Non connecté';
+          alertDiv.style.display = 'none';
+        }
+      }
+      showUser();
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <img src="logo/logo.png" alt="Logo ClassCloud" id="logo">
+        <h1><a href="index.html" style="color:inherit; text-decoration:none;">ClassCloud</a></h1>
+        <nav class="main-nav">
+            <a class="nav-link" href="index.html">Accueil</a>
+            <a class="nav-link" href="cours.html">Cours particulier</a>
+            <a class="nav-link" href="feedback.html">Feedback</a>
+            <a class="nav-link" href="compte.html">Compte</a>
+        </nav>
+    </header>
+    <main>
+        <section style="max-width: 500px; margin: 2rem auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px #0001; padding: 2rem;">
+            <div id="login-alert" style="display:none;margin-bottom:1.2rem;padding:0.8rem 1rem;background:#d1fae5;color:#065f46;border-radius:6px;font-weight:500;text-align:center;">Vous êtes connecté !</div>
+            <h2 style="text-align:center; color:#23272f; margin-bottom:1.5rem;">Espace Compte</h2>
+            <div style="margin-bottom:1.5rem;text-align:center;color:#23272f;font-size:1.08rem;">
+                <p>Bienvenue dans votre espace compte.<br>
+                Cette section pourra bientôt permettre&nbsp;:</p>
+                <ul style="text-align:left;max-width:350px;margin:0 auto 1rem auto;">
+                    <li>Se connecter ou créer un compte</li>
+                    <li>Gérer vos informations personnelles</li>
+                    <li>Voir l'historique de vos téléchargements</li>
+                    <li>Accéder à des contenus réservés</li>
+                </ul>
+                <span style="font-size:0.98rem;">(Fonctionnalités à venir)</span>
+            </div>
+            <div style="text-align:center;">
+                <button style="padding:0.7rem 2.2rem;font-size:1.1rem;border-radius:6px;border:1px solid #e5e7eb;background:#eaf4ff;color:#23272f;font-weight:500;cursor:not-allowed;opacity:0.7;">Connexion / Inscription</button>
+            </div>
+            <div id="auth" style="margin-top: 1.5rem;">
+              <h3 style="text-align:center; color:#23272f;">Connexion / Inscription</h3>
+              <input type="email" id="email" placeholder="Email" required style="width: 100%; padding: 0.7rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 4px;">
+              <input type="password" id="password" placeholder="Mot de passe" required style="width: 100%; padding: 0.7rem; margin: 0.5rem 0; border: 1px solid #ccc; border-radius: 4px;">
+              <button onclick="signUp()" style="width: 100%; padding: 0.7rem; font-size: 1.1rem; border-radius: 6px; border: none; background: #007bff; color: #fff; font-weight: 500; cursor: pointer; margin: 0.5rem 0;">S'inscrire</button>
+              <button onclick="signIn()" style="width: 100%; padding: 0.7rem; font-size: 1.1rem; border-radius: 6px; border: none; background: #28a745; color: #fff; font-weight: 500; cursor: pointer; margin: 0.5rem 0;">Se connecter</button>
+              <button onclick="signOut()" style="width: 100%; padding: 0.7rem; font-size: 1.1rem; border-radius: 6px; border: none; background: #dc3545; color: #fff; font-weight: 500; cursor: pointer; margin: 0.5rem 0;">Se déconnecter</button>
+              <div id="user-info" style="text-align:center; margin-top:1rem;"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Mathis</p>
+        <div id="socials">
+            <a href="https://www.linkedin.com/in/mathis-euzen-08b841350/" target="_blank" rel="noopener" title="LinkedIn">
+                <img src="logo/linkedin.png" alt="LinkedIn">
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
